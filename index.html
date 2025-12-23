@@ -939,46 +939,7 @@
                 }
             });
         }
-            if (!prefersReducedMotion) {
-        const animateCounter = (element) => {
-            const target = Number(element.dataset.counter || 0);
-            const duration = 1600;
-            const start = performance.now();
-            const initial = 0;
-
-            const step = (timestamp) => {
-                const progress = Math.min((timestamp - start) / duration, 1);
-                const value = Math.floor(initial + progress * (target - initial));
-                element.textContent = value.toLocaleString('fr-FR');
-                if (progress < 1) {
-                    requestAnimationFrame(step);
-                }
-            };
-
-            requestAnimationFrame(step);
-        };
-
-        const counterObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.6
-        });
-
-        counterElements.forEach(el => counterObserver.observe(el));
-    } else {
-        counterElements.forEach(el => {
-            const target = Number(el.dataset.counter || 0);
-            el.textContent = target.toLocaleString('fr-FR');
-        });
-    }
-    
-  
-        // --- NAVIGATION ---
+            // --- NAVIGATION ---
         function showSection(sectionId) {
             // Hide all sections
             document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
