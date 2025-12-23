@@ -522,6 +522,26 @@
             .hero h1 { font-size: 2rem; }
             .calculator-input { flex-direction: column; }
         }
+        .cta-button {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+.cta-button:active {
+    transform: scale(0.97);
+}
+
     </style>
 </head>
 <body>
@@ -663,8 +683,8 @@
             <div style="text-align: center; margin-bottom: 2rem;">
                 <h3 style="margin-bottom: 1rem;" data-i18n="calc_choose">Choisissez votre calculateur :</h3>
                 <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                    <button class="cta-button" onclick="showCalculator('simple')" data-i18n="calc_simple"><a href="bac.html">pour bac</a></button>
-                    <button class="cta-button" onclick="showCalculator('bulletin')" data-i18n="calc_bulletin"><a href="moyenne.html">calculer votre moyenne</a></button>
+                   <button class="cta-button" onclick="window.location.href='bac.html'">pour bac</button>
+                    <button class="cta-button" onclick="window.location.href='moyenne.html'">calculer votre moyenne</button>
                 </div>
             </div>
 
