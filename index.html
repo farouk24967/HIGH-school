@@ -1,210 +1,1000 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حسني احمد high school</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="website icon" type="png" href="photos/حسني احمد high school.png">
-  <link rel="stylesheet" href="D:\PROGRAMATION\HIGH school\CSS\style.css">
-  
-  <style>
-    * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="photos/حسني احمد high school.png" type="image/png">
+    <title>Lycée Chahid Hasni Ahmed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* --- VARIABLES & RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
 
-body {
-  background-color: #faf0fe;
-  font-family: 'Trebuchet MS', Arial, sans-serif;
-}
+        :root {
+            --primary-dark: #354338;
+            --primary-green: #99C03E;
+            --light-green: #CCE29B;
+            --gray: #595859;
+            --light-bg: #DAEBD4;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(53, 67, 56, 0.1);
+        }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px  50px;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 10;
-}
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--primary-dark);
+            transition: all 0.3s ease;
+        }
 
-header img.logo {
-  position: relative  ;
-  top: 0;
-  left: 50px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-}
+        /* --- HEADER & NAVBAR --- */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 50px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-/* === MENU PC (> 900px) === */
-.navbar ul {
-  display: flex;
-gap: 2rem;
-  list-style: none;
-}
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
 
-.navbar a {
-  color: #3a3d3a;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 10px;
-  transition: 0.3s;
-}
+        header img.logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: contain;
+        }
 
-.navbar a:hover {
-  background-color: #e6f7e6;
-  color: #228B22;
-}
+        /* LANGUAGE SELECTOR */
+        .lang-selector {
+            position: relative;
+        }
 
-.navbar .hamburger {
-  display: none;
-}
+        .lang-select {
+            padding: 8px 12px;
+            border: 1px solid var(--primary-green);
+            border-radius: 6px;
+            background-color: white;
+            color: var(--primary-dark);
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+        }
 
-/* === MENU MOBILE (< 900px) === */
-@media (max-width: 900px) {
-  .navbar .hamburger {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;  
-    background: #353738;
-    color: rgb(0, 0, 0);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 30px;
-    z-index: 100;
-  }
+        .lang-select:hover {
+            background-color: var(--light-green);
+        }
 
-  .navbar .hamburger:hover {
-    background: #ffffff;
-    color: #353738;
-  }
+        .navbar ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
 
-  .navbar ul {
-    position: fixed;
-    top: 0;
-    right: -350px;
-    width: 350px ;
-    height: 100vh;  
-    background: white;
-    flex-direction: column;
-    border-radius: 15px;
-    padding:   90px 0px;
-    z-index: 99;
-    box-shadow:-5px 0 15px rgba(0, 0, 0, 0.1);
-    transition: right 0.3 ease  ;
-  }
+        .navbar a {
+            color: var(--primary-dark);
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-  .navbar ul.active {
-    right: 0;
-  }
+        .navbar a:hover {
+            background-color: var(--light-green);
+            color: var(--primary-green);
+        }
 
-  .navbar a {
-  color: #3a3d3a;
-  font-weight: bold;
-  padding:  18px  20px;
- border-radius: 18px;
+        .navbar .hamburger {
+            display: none;
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px 15px;
+            z-index: 100;
+        }
 
+        /* --- MAIN CONTENT --- */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 80vh;
+        }
 
-  transition: 0.3s;
-  }
+        section {
+            display: none;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.4s ease-in-out;
+        }
 
-  .navbar a:hover {
-    background-color: #bfc5bf;
-    color: #228B22;
-    border-radius: 12px;
-   
-  }
+        section.active {
+            display: block;
+        }
 
-  header img.logo {
-    width: 100px;
-    height: 100px;
-  }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-  hr {
-    display: none;
-  }
-}
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
 
-    /* Overlay */
-    .overlay {
-      display: none;
-      position:static;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 98;
-    }
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #4a5a4d 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Subtle pattern overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
 
-  </style>
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--primary-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: var(--light-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(153, 192, 62, 0.4);
+        }
+
+        /* CARDS & GRIDS */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            /* Border handled by LTR/RTL logic */
+        }
+        
+        /* Default LTR Border */
+        html[dir="ltr"] .card {
+            border-left: 5px solid var(--primary-green);
+        }
+        /* RTL Border */
+        html[dir="rtl"] .card {
+            border-right: 5px solid var(--primary-green);
+            text-align: right;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(153, 192, 62, 0.15);
+        }
+
+        .card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* NEWS */
+        .news-item {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        html[dir="ltr"] .news-item { border-left: 4px solid var(--primary-green); }
+        html[dir="rtl"] .news-item { border-right: 4px solid var(--primary-green); }
+
+        .news-date {
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* GALLERY */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: var(--light-bg);
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 2px solid var(--primary-green);
+        }
+
+        .gallery-item:hover { transform: scale(1.03); }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(53, 67, 56, 0.9);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* CALCULATOR & FORMS */
+        .calculator, .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid var(--primary-green);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .form-group input, .form-group textarea, .calculator-input input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .calculator-input input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(153, 192, 62, 0.2);
+        }
+
+        .calculator-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        /* GRADES LIST */
+        .grades-list {
+            list-style: none;
+            margin-top: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .grades-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--light-bg);
+            background: #fff;
+        }
+
+        .remove-grade {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+
+        .remove-grade:hover { background-color: #c0392b; }
+
+        /* TOAST NOTIFICATION */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+        }
+
+        .toast {
+            background-color: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show { opacity: 1; }
+        .toast.success { background-color: var(--primary-green); color: var(--primary-dark); }
+        .toast.error { background-color: #e74c3c; color: white; }
+
+        /* MAP */
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        html[dir="rtl"] .footer-content { text-align: right; }
+        html[dir="ltr"] .footer-content { text-align: left; }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover { color: var(--primary-green); }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-green);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* TABLES */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        html[dir="rtl"] th, html[dir="rtl"] td { text-align: right; }
+        th { background-color: var(--light-bg); color: var(--primary-dark); font-weight: bold; }
+        tr:hover { background-color: #f9f9f9; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            header { padding: 15px 20px; flex-wrap: wrap; }
+            .header-left { width: 100%; justify-content: space-between; margin-bottom: 10px; }
+            .navbar { width: 100%; display: flex; justify-content: flex-end; }
+            .navbar .hamburger { display: block; }
+            
+            .navbar ul {
+                position: fixed;
+                top: 0;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding-top: 80px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease;
+                z-index: 90;
+            }
+
+            /* LTR: Menu slides from right, RTL: Menu slides from left */
+            html[dir="ltr"] .navbar ul { right: -300px; }
+            html[dir="rtl"] .navbar ul { left: -300px; }
+
+            html[dir="ltr"] .navbar ul.active { right: 0; }
+            html[dir="rtl"] .navbar ul.active { left: 0; }
+
+            .navbar a { width: 100%; border-radius: 0; border-bottom: 1px solid var(--light-bg); }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .calculator-input { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-      <img src="photos/حسني احمد high school.png" alt="High School Logo" class="logo">
- 
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container"></div>
 
-    <nav class="navbar">
-      <button class="hamburger" id="hamburger">
-        <i class="fas fa-bars"></i>
-      </button>
+    <!-- HEADER -->
+    <header>
+        <div class="header-left">
+            <img src="photos/حسني احمد high school.png" alt="Logo" class="logo">
+            
+            <!-- LANGUAGE SELECTOR -->
+            <div class="lang-selector">
+                <select id="languageSelect" class="lang-select" onchange="changeLanguage(this.value)">
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="ar">🇩🇿 العربية</option>
+                </select>
+            </div>
+        </div>
 
-      <ul id="menu">
-        <li><a href="#Accueil"><i class="fas fa-home"></i> HOME PAGE</a></li>
-        <li><a href="#About the high school"><i class="fas fa-info-circle"></i> ABOUT US</a></li>
-        <li><a href="#Contact us"><i class="fas fa-phone"></i> CONTACT US</a></li>
-        <li><a href="#About years school"><i class="fas fa-book"></i> THE 3 YEARS</a></li>
-      </ul>
-    </nav>
-  </header>
+        <nav class="navbar">
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="menu">
+                <li><a href="#" onclick="showSection('accueil')"><i class="fas fa-home"></i> <span data-i18n="nav_home">Accueil</span></a></li>
+                <li><a href="#" onclick="showSection('apropos')"><i class="fas fa-info-circle"></i> <span data-i18n="nav_about">À propos</span></a></li>
+                <li><a href="#" onclick="showSection('filieres')"><i class="fas fa-book"></i> <span data-i18n="nav_tracks">Filières</span></a></li>
+                <li><a href="#" onclick="showSection('ressources')"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav_resources">Ressources</span></a></li>
+                <li><a href="#" onclick="showSection('galerie')"><i class="fas fa-images"></i> <span data-i18n="nav_gallery">Galerie</span></a></li>
+                <li><a href="#" onclick="showSection('contact')"><i class="fas fa-phone"></i> <span data-i18n="nav_contact">Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <div class="overlay" id="overlay"></div>
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- ACCUEIL -->
+        <section id="accueil" class="active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 data-i18n="hero_title">Bienvenue au Lycée Chahid Hasni Ahmed</h1>
+                    <p data-i18n="hero_subtitle">Préparez votre avenir avec nos formations de qualité et nos équipes dévouées</p>
+                    <button class="cta-button" onclick="showSection('filieres')" data-i18n="btn_discover">Découvrir nos filières</button>
+                </div>
+            </div>
 
-  <hr>
+            <!-- IMAGE PRINCIPALE -->
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="https://supa.kortix.com/storage/v1/object/public/image-uploads/loaded_images/image_20251222_192948_4725722e.png?" alt="Lycée Building" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
+                <p style="color: var(--primary-green); font-weight: bold; margin-top: 10px;" data-i18n="img_caption">Bâtiment principal du Lycée Chahid Hasni Ahmed</p>
+            </div>
 
-  <script>
-   const hamburger = document.getElementById("hamburger");
-    const menu = document.getElementById("menu");
-    const overlay = document.getElementById("overlay");
+            <h2 class="section-title" data-i18n="news_title">Actualités récentes</h2>
+            <div id="news-container">
+                <div class="news-item">
+                    <span class="news-date">21 Dec 2025</span>
+                    <h4 data-i18n="news_1_title">Journée portes ouvertes</h4>
+                    <p data-i18n="news_1_desc">Venez découvrir nos installations et rencontrer nos équipes pédagogiques. Samedi 15 janvier 2026 de 9h à 17h.</p>
+                </div>
+                <div class="news-item">
+                    <span class="news-date">18 Dec 2025</span>
+                    <h4 data-i18n="news_2_title">Résultats des examens</h4>
+                    <p data-i18n="news_2_desc">Félicitations à tous nos élèves pour leurs excellents résultats aux examens de fin d'année.</p>
+                </div>
+            </div>
+        </section>
 
-    // Ouvrir/Fermer avec hamburger
-    hamburger.addEventListener("click", (e) => {
-      e.stopPropagation(); // Important : empêche la propagation
-      menu.classList.toggle("active");
-      overlay.style.display = menu.classList.contains("active") ? "block" : "none";
-    });
+        <!-- À PROPOS -->
+        <section id="apropos">
+            <h2 class="section-title" data-i18n="about_title">À propos du lycée</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>📍 <span data-i18n="card_loc_title">Localisation</span></h3>
+                    <p data-i18n="card_loc_text">Adresse: Beni Saf / Algérie</p>
+                    <p data-i18n="card_phone">Téléphone: +213 (0)X XX XX XX XX</p>
+                    <p data-i18n="card_email">Email: contact@lycee-chahid.dz</p>
+                </div>
+                <div class="card">
+                    <h3>📚 <span data-i18n="card_hist_title">Historique</span></h3>
+                    <p data-i18n="card_hist_text">Fondé pour devenir un centre d'excellence en formation professionnelle, notre lycée accueille des centaines d'élèves chaque année.</p>
+                </div>
+                <div class="card">
+                    <h3>🎯 <span data-i18n="card_miss_title">Notre mission</span></h3>
+                    <p data-i18n="card_miss_text">Préparer les élèves à réussir dans le monde professionnel en combinant théorie et pratique.</p>
+                </div>
+            </div>
+        </section>
 
-    // Fermer avec overlay
-    overlay.addEventListener("click", () => {
-      menu.classList.remove("active");
-      overlay.style.display = "none";
-    });
+        <!-- FILIÈRES -->
+        <section id="filieres">
+            <h2 class="section-title" data-i18n="nav_tracks">Filières et classes</h2>
+            
+            <!-- 1AS -->
+            <h3 style="margin: 2rem 0 1rem; color: var(--primary-dark); font-size: 1.8rem;">1️⃣ 1AS <span style="font-size:1rem; opacity:0.8" data-i18n="1AS_subtitle">(Première année)</span></h3>
+            
+            <div class="card">
+                <h4 style="color: var(--primary-green); margin-bottom: 1rem;">🔬 <span data-i18n="track_science">Filière Scientifique</span></h4>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-i18n="subj">Matière</th>
+                                <th data-i18n="coef">Coefficient</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td data-i18n="mat_math">Mathématiques</td><td>5</td></tr>
+                            <tr><td data-i18n="mat_sci">Sciences naturelles</td><td>4</td></tr>
+                            <tr><td data-i18n="mat_phys">Sciences physiques</td><td>4</td></tr>
+                            <tr><td data-i18n="mat_arab">Arabe</td><td>3</td></tr>
+                            <tr><td data-i18n="mat_fr">Français</td><td>2</td></tr>
+                            <tr><td data-i18n="mat_eng">Anglais</td><td>2</td></tr>
+                            <tr><td data-i18n="mat_hist">Histoire-Géo</td><td>2</td></tr>
+                            <tr><td data-i18n="mat_islam">Sciences islamiques</td><td>2</td></tr>
+                            <tr><td data-i18n="mat_tech">Technologie</td><td>2</td></tr>
+                            <tr><td data-i18n="mat_info">Informatique</td><td>2</td></tr>
+                            <tr><td data-i18n="mat_sport">Éducation physique</td><td>1</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-    // ✅ Empêcher la fermeture quand on clique sur un lien
-    document.querySelectorAll('.menu-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        // On ne fait rien de spécial → juste laisser le lien fonctionner
-        // Mais on empêche que ça ferme + réouvre à cause de rafraîchissement
-        // Le menu reste ouvert, mais tu peux le fermer manuellement
-      });
-    });
+            <!-- 2AS & 3AS Placeholders -->
+            <div class="card" style="margin-top: 2rem;">
+                <h4 style="color: var(--primary-green);">2️⃣ 2AS & 3️⃣ 3AS</h4>
+                <p data-i18n="tracks_more_info">Les coefficients et matières évoluent en 2ème et 3ème année selon la spécialisation choisie (Mathématiques, Lettres, Langues, Gestion, etc.).</p>
+            </div>
+        </section>
 
-    // Optionnel : fermer le menu après avoir cliqué sur un lien
-    document.querySelectorAll('.menu-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        // Si tu veux fermer le menu automatiquement après clic :
-        setTimeout(() => {
-          menu.classList.remove("active");
-          overlay.style.display = "none";
-        }, 100); // Léger délai pour laisser le hover finir
-      });
-    });
-  </script>
+        <!-- RESSOURCES -->
+        <section id="ressources">
+            <h2 class="section-title" data-i18n="nav_resources">Ressources pédagogiques</h2>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 1rem;" data-i18n="calc_choose">Choisissez votre calculateur :</h3>
+                <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <button class="cta-button" onclick="showCalculator('simple')" data-i18n="calc_simple"><a href="bac.html">pour bac</a></button>
+                    <button class="cta-button" onclick="showCalculator('bulletin')" data-i18n="calc_bulletin"><a href="moyenne.html">calculer votre moyenne</a></button>
+                </div>
+            </div>
 
+         
+        <!-- GALERIE -->
+        <section id="galerie">
+            <h2 class="section-title" data-i18n="nav_gallery">Galerie photos</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><div class="gallery-placeholder">🏫</div><div class="gallery-caption" data-i18n="gal_build">Bâtiment</div></div>
+                <div class="gallery-item"><div class="gallery-placeholder">🔬</div><div class="gallery-caption" data-i18n="gal_lab">Labo</div></div>
+                <div class="gallery-item"><div class="gallery-placeholder">💻</div><div class="gallery-caption" data-i18n="gal_info">Informatique</div></div>
+                <div class="gallery-item"><div class="gallery-placeholder">🏋️</div><div class="gallery-caption" data-i18n="al_sport">Sport</div></div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2 class="section-title" data-i18n="nav_contact">Nous contacter</h2>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.5234567890123!2d2.3522!3d48.8566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f1f1f1f1f%3A0x1f1f1f1f1f1f1f1f!2sAlgeria!5e0!3m2!1sfr!2sdz!4v1234567890" loading="lazy"></iframe>
+            </div>
+
+            <form class="contact-form" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label data-i18n="lbl_name">Nom complet *</label>
+                    <input type="text" id="name" required data-i18n-placeholder="ph_name">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="lbl_email">Email *</label>
+                    <input type="email" id="email" required data-i18n-placeholder="ph_email">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="lbl_msg">Message *</label>
+                    <textarea id="message" rows="5" required data-i18n-placeholder="ph_msg"></textarea>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;" data-i18n="btn_send">Envoyer le message</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 data-i18n="footer_about">À propos</h4>
+                <a href="#" onclick="showSection('apropos')" data-i18n="nav_about">À propos</a>
+                <a href="#" onclick="showSection('filieres')" data-i18n="nav_tracks">Filières</a>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer_contact">Contact</h4>
+                <p>📞 +213 (0)X XX XX XX XX</p>
+                <p>📧 contact@lycee-chahid.dz</p>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.9rem;">
+            <p>&copy; 2025 Lycée Chahid Hasni Ahmed. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- TRANSLATIONS ---
+        const translations = {
+            fr: {
+                nav_home: "Accueil", nav_about: "À propos", nav_tracks: "Filières", nav_resources: "Ressources", nav_gallery: "Galerie", nav_contact: "Contact",
+                hero_title: "Bienvenue au Lycée Chahid Hasni Ahmed", hero_subtitle: "Préparez votre avenir avec nos formations de qualité et nos équipes dévouées",
+                btn_discover: "Découvrir nos filières", img_caption: "Bâtiment principal du Lycée Chahid Hasni Ahmed",
+                news_title: "Actualités récentes", news_1_title: "Journée portes ouvertes", news_1_desc: "Venez découvrir nos installations et rencontrer nos équipes pédagogiques.",
+                news_2_title: "Résultats des examens", news_2_desc: "Félicitations à tous nos élèves pour leurs excellents résultats.",
+                about_title: "À propos du lycée", card_loc_title: "Localisation", card_loc_text: "Adresse: Beni Saf / Algérie", card_phone: "Téléphone: +213 (0)X XX XX XX XX",
+                card_email: "Email: contact@lycee-chahid.dz", card_hist_title: "Historique", card_hist_text: "Fondé pour devenir un centre d'excellence.",
+                card_miss_title: "Notre mission", card_miss_text: "Préparer les élèves à réussir dans le monde professionnel.",
+                AS_subtitle: "(Première année)", track_science: "Filière Scientifique",
+                subj: "Matière", coef: "Coefficient",
+                mat_math: "Mathématiques", mat_sci: "Sciences naturelles", mat_phys: "Sciences physiques", mat_arab: "Arabe",
+                mat_fr: "Français", mat_eng: "Anglais", mat_hist: "Histoire-Géo", mat_islam: "Sciences islamiques",
+                mat_tech: "Technologie", mat_info: "Informatique", mat_sport: "Éducation physique",
+                tracks_more_info: "Les coefficients évoluent en 2ème et 3ème année selon la spécialisation choisie.",
+                calc_choose: "Choisissez votre calculateur :", calc_simple: "Calculateur simple", calc_bulletin: "Bulletin scolaire",
+                calc_simple_title: "Moyenne Simple", calc_desc: "Entrez vos notes (0-20) pour calculer la moyenne.",
+                ph_note: "Note (0-20)", btn_add: "Ajouter", res_avg: "Votre moyenne :", btn_reset: "Réinitialiser",
+                calc_coming_soon: "Calculateur de bulletin complet bientôt disponible.",
+                gal_build: "Bâtiment", gal_lab: "Labo", gal_info: "Informatique", al_sport: "Sport",
+                lbl_name: "Nom complet *", lbl_email: "Email *", lbl_msg: "Message *", btn_send: "Envoyer le message",
+                ph_name: "Votre nom", ph_email: "votre@email.com", ph_msg: "Écrivez votre message ici...",
+                footer_about: "À propos", footer_contact: "Contact", footer_rights: "Tous droits réservés."
+            },
+            en: {
+                nav_home: "Home", nav_about: "About", nav_tracks: "Tracks", nav_resources: "Resources", nav_gallery: "Gallery", nav_contact: "Contact",
+                hero_title: "Welcome to Chahid Hasni Ahmed High School", hero_subtitle: "Prepare your future with our quality training and dedicated teams",
+                btn_discover: "Discover our tracks", img_caption: "Main building of Chahid Hasni Ahmed High School",
+                news_title: "Recent News", news_1_title: "Open Day", news_1_desc: "Come discover our facilities and meet our educational teams.",
+                news_2_title: "Exam Results", news_2_desc: "Congratulations to all our students for their excellent results.",
+                about_title: "About the High School", card_loc_title: "Location", card_loc_text: "Address: Beni Saf / Algeria", card_phone: "Phone: +213 (0)X XX XX XX XX",
+                card_email: "Email: contact@lycee-chahid.dz", card_hist_title: "History", card_hist_text: "Founded to become a center of excellence.",
+                card_miss_title: "Our Mission", card_miss_text: "Preparing students to succeed in the professional world.",
+                AS_subtitle: "(First Year)", track_science: "Science Track",
+                subj: "Subject", coef: "Coefficient",
+                mat_math: "Mathematics", mat_sci: "Natural Sciences", mat_phys: "Physical Sciences", mat_arab: "Arabic",
+                mat_fr: "French", mat_eng: "English", mat_hist: "History-Geog", mat_islam: "Islamic Sciences",
+                mat_tech: "Technology", mat_info: "Computer Science", mat_sport: "Physical Education",
+                tracks_more_info: "Coefficients evolve in the 2nd and 3rd year according to the chosen specialization.",
+                calc_choose: "Choose your calculator:", calc_simple: "Simple Calculator", calc_bulletin: "School Report",
+                calc_simple_title: "Simple Average", calc_desc: "Enter your grades (0-20) to calculate the average.",
+                ph_note: "Grade (0-20)", btn_add: "Add", res_avg: "Your average:", btn_reset: "Reset",
+                calc_coming_soon: "Full report card calculator coming soon.",
+                gal_build: "Building", gal_lab: "Lab", gal_info: "IT", al_sport: "Sport",
+                lbl_name: "Full Name *", lbl_email: "Email *", lbl_msg: "Message *", btn_send: "Send Message",
+                ph_name: "Your name", ph_email: "your@email.com", ph_msg: "Write your message here...",
+                footer_about: "About", footer_contact: "Contact", footer_rights: "All rights reserved."
+            },
+            es: {
+                nav_home: "Inicio", nav_about: "Acerca de", nav_tracks: "Carreras", nav_resources: "Recursos", nav_gallery: "Galería", nav_contact: "Contacto",
+                hero_title: "Bienvenidos a la Escuela Secundaria Chahid Hasni Ahmed", hero_subtitle: "Prepara tu futuro con nuestra formación de calidad y equipos dedicados",
+                btn_discover: "Descubrir carreras", img_caption: "Edificio principal de la Escuela Chahid Hasni Ahmed",
+                news_title: "Noticias recientes", news_1_title: "Puertas Abiertas", news_1_desc: "Venga a descubrir nuestras instalaciones y conocer a nuestros equipos educativos.",
+                news_2_title: "Resultados de exámenes", news_2_desc: "Felicitaciones a todos nuestros estudiantes por sus excelentes resultados.",
+                about_title: "Acerca de la escuela", card_loc_title: "Ubicación", card_loc_text: "Dirección: Beni Saf / Argelia", card_phone: "Teléfono: +213 (0)X XX XX XX XX",
+                card_email: "Email: contact@lycee-chahid.dz", card_hist_title: "Historia", card_hist_text: "Fundado para convertirse en un centro de excelencia.",
+                card_miss_title: "Nuestra Misión", card_miss_text: "Preparar a los estudiantes para tener éxito en el mundo profesional.",
+                AS_subtitle: "(Primer Año)", track_science: "Rama Científica",
+                subj: "Materia", coef: "Coeficiente",
+                mat_math: "Matemáticas", mat_sci: "Ciencias Naturales", mat_phys: "Ciencias Físicas", mat_arab: "Árabe",
+                mat_fr: "Francés", mat_eng: "Inglés", mat_hist: "Historia-Geo", mat_islam: "Ciencias Islámicas",
+                mat_tech: "Tecnología", mat_info: "Informática", mat_sport: "Educación Física",
+                tracks_more_info: "Los coeficientes evolucionan en 2º y 3º año según la especialización elegida.",
+                calc_choose: "Elige tu calculadora:", calc_simple: "Calculadora simple", calc_bulletin: "Boletín escolar",
+                calc_simple_title: "Promedio Simple", calc_desc: "Ingrese sus notas (0-20) para calcular el promedio.",
+                ph_note: "Nota (0-20)", btn_add: "Añadir", res_avg: "Su promedio:", btn_reset: "Reiniciar",
+                calc_coming_soon: "Calculadora de boletín completa próximamente.",
+                gal_build: "Edificio", gal_lab: "Laboratorio", gal_info: "Informática", al_sport: "Deporte",
+                lbl_name: "Nombre completo *", lbl_email: "Correo *", lbl_msg: "Mensaje *", btn_send: "Enviar mensaje",
+                ph_name: "Tu nombre", ph_email: "tu@email.com", ph_msg: "Escribe tu mensaje aquí...",
+                footer_about: "Acerca de", footer_contact: "Contacto", footer_rights: "Todos los derechos reservados."
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_about: "حول المدرسة", nav_tracks: "الشعب", nav_resources: "الموارد", nav_gallery: "المعرض", nav_contact: "اتصل بنا",
+                hero_title: "مرحبًا بكم في ثانوية الشهيد حسني أحمد", hero_subtitle: "جهز مستقبلك مع تدريبنا عالي الجودة وفريقنا المخصص",
+                btn_discover: "اكتشف شعبنا", img_caption: "المبنى الرئيسي لثانوية الشهيد حسني أحمد",
+                news_title: "أحدث الأخبار", news_1_title: "يوم الأبواب المفتوحة", news_1_desc: "تعالوا لاكتشاف مرافقنا ومقابلة الفريق التعليمي.",
+                news_2_title: "نتائج الامتحانات", news_2_desc: "تهانينا لجميع طلابنا على نتائجهم المتميزة.",
+                about_title: "عن الثانوية", card_loc_title: "الموقع", card_loc_text: "العنوان: بني صاف / الجزائر", card_phone: "الهاتف: +213 (0)X XX XX XX XX",
+                card_email: "البريد: contact@lycee-chahid.dz", card_hist_title: "التاريخ", card_hist_text: "تأسست لتصبح مركزًا للتميز.",
+                card_miss_title: "مهمتنا", card_miss_text: "إعداد الطلاب للنجاح في العالم المهني.",
+                AS_subtitle: "(السنة الأولى)", track_science: "الشعبة العلمية",
+                subj: "المادة", coef: "المعامل",
+                mat_math: "الرياضيات", mat_sci: "العلوم الطبيعية", mat_phys: "العلوم الفيزيائية", mat_arab: "اللغة العربية",
+                mat_fr: "الفرنسية", mat_eng: "الإنجليزية", mat_hist: "التاريخ والجغرافيا", mat_islam: "العلوم الإسلامية",
+                mat_tech: "التكنولوجيا", mat_info: "الإعلام الآلي", mat_sport: "التربية البدنية",
+                tracks_more_info: "تتطور المعاملات في السنة الثانية والثالثة حسب التخصص المختار.",
+                calc_choose: "اختر الآلة الحاسبة:", calc_simple: "آلة بسيطة", calc_bulletin: "كشف النقاط",
+                calc_simple_title: "المعدل البسيط", calc_desc: "أدخل درجاتك (0-20) لحساب المعدل.",
+                ph_note: "الدرجة (0-20)", btn_add: "إضافة", res_avg: "معدلك:", btn_reset: "إعادة تعيين",
+                calc_coming_soon: "آلة حاسبة لكشف النقاط الكامل قريباً.",
+                gal_build: "المبنى", gal_lab: "المختبر", gal_info: "المعلوميات", al_sport: "الرياضة",
+                lbl_name: "الاسم الكامل *", lbl_email: "البريد الإلكتروني *", lbl_msg: "الرسالة *", btn_send: "إرسال الرسالة",
+                ph_name: "اسمك", ph_email: "بريدك@الالكتروني.com", ph_msg: "اكتب رسالتك هنا...",
+                footer_about: "معلومات عنا", footer_contact: "اتصل بنا", footer_rights: "جميع الحقوق محفوظة."
+            }
+        };
+
+        // --- LANGUAGE SWITCHER LOGIC ---
+        function changeLanguage(lang) {
+            const doc = document.documentElement;
+            
+            // Set Direction
+            if (lang === 'ar') {
+                doc.setAttribute('dir', 'rtl');
+                doc.lang = 'ar';
+            } else {
+                doc.setAttribute('dir', 'ltr');
+                doc.lang = lang;
+            }
+
+            // Update Text Content
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Update Placeholders
+            const inputs = document.querySelectorAll('[data-i18n-placeholder]');
+            inputs.forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+        }
+
+        // --- NAVIGATION ---
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            // Show target
+            document.getElementById(sectionId).classList.add('active');
+            // Close mobile menu
+            document.getElementById('menu').classList.remove('active');
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('active');
+        });
+
+        // --- TOAST NOTIFICATIONS (Replacement for Alert) ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            let icon = type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
+            toast.innerHTML = `${icon} <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => toast.classList.add('show'), 10);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // --- CALCULATOR LOGIC ---
+        let grades = [];
+
+        function addGrade() {
+            const input = document.getElementById('gradeInput');
+            const val = parseFloat(input.value);
+            const lang = document.documentElement.lang;
+
+            // Translations for error messages
+            let errorMsg = translations[lang].ph_note; // Fallback or specific error text
+            if(lang === 'ar') errorMsg = "الرجاء إدخال درجة صحيحة بين 0 و 20";
+            else if(lang === 'en') errorMsg = "Please enter a valid grade between 0 and 20";
+            else if(lang === 'es') errorMsg = "Por favor ingrese una nota válida entre 0 y 20";
+            else errorMsg = "Veuillez entrer une note valide entre 0 et 20";
+
+            if (isNaN(val) || val < 0 || val > 20) {
+                showToast(errorMsg, 'error');
+                return;
+            }
+
+            grades.push(val);
+            input.value = '';
+            updateGradesList();
+            calculateAverage();
+        }
+
+        function updateGradesList() {
+            const list = document.getElementById('gradesList');
+            list.innerHTML = '';
+            
+            grades.forEach((g, i) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span><strong>Note ${i+1}:</strong> ${g.toFixed(2)}</span>
+                    <button class="remove-grade" onclick="removeGrade(${i})"><i class="fas fa-trash"></i></button>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function removeGrade(index) {
+            grades.splice(index, 1);
+            updateGradesList();
+            calculateAverage();
+        }
+
+        function calculateAverage() {
+            const resBox = document.getElementById('calcResult');
+            if (grades.length === 0) {
+                resBox.style.display = 'none';
+                return;
+            }
+            const sum = grades.reduce((a, b) => a + b, 0);
+            const avg = sum / grades.length;
+            document.getElementById('averageValue').textContent = avg.toFixed(2);
+            resBox.style.display = 'block';
+        }
+
+        function resetCalculator() {
+            grades = [];
+            document.getElementById('gradeInput').value = '';
+            document.getElementById('gradesList').innerHTML = '';
+            document.getElementById('calcResult').style.display = 'none';
+        }
+
+        function showCalculator(type) {
+            document.getElementById('simpleCalc').style.display = type === 'simple' ? 'block' : 'none';
+            document.getElementById('bulletinCalc').style.display = type === 'bulletin' ? 'block' : 'none';
+        }
+
+        // --- FORM LOGIC ---
+        function submitForm(e) {
+            e.preventDefault();
+            const lang = document.documentElement.lang;
+            
+            let successMsg = "Message envoyé avec succès !";
+            if(lang === 'en') successMsg = "Message sent successfully!";
+            if(lang === 'es') successMsg = "¡Mensaje enviado con éxito!";
+            if(lang === 'ar') successMsg = "تم إرسال الرسالة بنجاح!";
+
+            // Simulate sending
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = "...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                showToast(successMsg, 'success');
+                e.target.reset();
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1000);
+        }
+    </script>
 </body>
 </html>

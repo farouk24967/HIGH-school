@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arial&display=swap">
+<link rel="website icon" href="photos/حسني احمد high school.png" type="image/png">
+<title>calculateur de notes</title>
+<style>
+  body { font-family: 'Arial', sans-serif; background: #f4f4f4; padding: 20px; direction: rtl; }
+  .bulletin { max-width: 1000px; margin: auto; background: #fff; padding: 20px; border: 1px solid #000; }
+  h1, h2 { text-align: center; margin: 5px 0; }
+  .info { display: flex; justify-content: space-between; margin-bottom: 20px; }
+  .info div { width: 48%; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+  th, td { border: 1px solid #000; padding: 5px; text-align: center; }
+  th { background: #eee; }
+  input[type=number] { width: 60px; text-align: center; }
+  #result { font-weight: bold; text-align: center; margin-top: 10px; }
+  
+  /* Styles pour les sélecteurs */
+  .selectors { margin-bottom: 20px; text-align: center; }
+  .selectors select { 
+    padding: 8px; 
+    margin: 0 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc;
+    direction: ltr;
+  }
+  
+  /* Style pour les erreurs */
+  .error { background-color: #ffe6e6 !important; border: 2px solid #ff0000; }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .info { flex-direction: column; gap: 15px; }
+    .info div { width: 100%; }
+  }
+  
+  /* Animation pour les boutons */
+  button {
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+<body>
+
+<div class="bulletin">
+  <h1>الجمهورية الجزائرية الديمقراطية الشعبية</h1>
+  <h2>وزارة التربية الوطنية</h2>
+  
+  <div class="selectors">
+    <select id="year">
+      <option value="1">1ère année secondaire</option>
+      <option value="2">2ème année secondaire</option>
+      <option value="3">3ème année secondaire</option>
+    </select>
+    <select id="filiere"></select>
+  </div>
+  
+  <table id="bulletinTable">
+    <tr>
+      <th>المادة</th>
+      <th>المعامل</th>
+      <th>الفرض</th>
+      <th>تقويم مستمر</th>
+      <th>أعمال تطبيقية</th>
+      <th>اختبار</th>
+      <th>معدل المادة</th>
+      <th>مجموع نقاط المادة</th>
+      <th>شامل؟</th>
+    </tr>
+  </table>
+
+  <div style="text-align: center; margin: 15px 0;">
+    <button onclick="calculateAverage()" style="margin: 0 10px; padding: 8px 20px; background: #28a745; color: white; border: none; border-radius: 5px;">حساب المعدل العام</button>
+    <button onclick="resetForm()" style="margin: 0 10px; padding: 8px 20px; background: #6c757d; color: white; border: none; border-radius: 5px;">مسح الكل</button>
+    <button onclick="fillRandom()" style="margin: 0 10px; padding: 8px 20px; background: #17a2b8; color: white; border: none; border-radius: 5px;">أدخل علامات عشوائية</button>
+  </div>
+  
+  <div id="result" style="font-weight: bold; text-align: center; margin-top: 10px;"></div>
+</div>
+
+<script>
+// Données : Matières et coefficients par année et filière
+const data = {
+  "1": { // 1ère année
+    "Scientifique": [
+      {name: "Mathématiques", coef:5}, {name:"Sciences naturelles", coef:4}, {name:"Sciences physiques", coef:4},
+      {name:"Arabe", coef:3}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:2},
+      {name:"Sciences islamiques", coef:2}, 
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Lettres & Philosophie": [
+      {name:"Arabe", coef:5}, {name:"Français", coef:3}, {name:"Anglais", coef:3}, {name:"Histoire-Géo", coef:3},
+      {name:"Mathématiques", coef:2}, {name:"Sciences naturelles", coef:2}, {name:"Sciences physiques", coef:2},
+      {name:"Sciences islamiques", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ]
+  },
+  "2": { // 2ème année
+    "Scientifique": [
+      {name:"Sciences naturelles", coef:6}, {name:"Mathématiques", coef:5}, {name:"Sciences physiques", coef:5},
+      {name:"Arabe", coef:3}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:2},
+      {name:"Sciences islamiques", coef:2}, {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Math": [
+      {name:"Mathématiques", coef:7}, {name:"Sciences physiques", coef:6}, {name:"Sciences naturelles", coef:2},
+      {name:"Arabe", coef:3}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:2},
+      {name:"Sciences islamiques", coef:2}, {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Math-Technique": [
+      {name:"Mathématiques", coef:6}, {name:"Physique", coef:5}, {name:"Technologie", coef:6},
+      {name:"Arabe", coef:3}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:2},
+      {name:"Sciences islamiques", coef:2}, {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Gestion": [
+      {name:"Gestion et comptabilité", coef:5}, {name:"Economie & management", coef:4}, {name:"Droit", coef:2}, {name:"Mathématiques", coef:3},
+      {name:"Arabe", coef:2}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:3}, {name:"Sciences islamiques", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Langues": [
+      {name:"Arabe", coef:4}, {name:"Français", coef:4}, {name:"Anglais", coef:4}, {name:"Troisième langue", coef:4},
+      {name:"Mathématiques", coef:2}, {name:"Histoire-Géo", coef:4}, {name:"Sciences islamiques", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Lettres & Philosophie": [
+      {name:"Arabe", coef:5}, {name:"Philosophie", coef:5}, {name:"Histoire-Géo", coef:4}, {name:"Français", coef:3}, {name:"Anglais", coef:3},
+      {name:"Mathématiques", coef:2}, {name:"Sciences naturelles", coef:2}, {name:"Sciences physiques", coef:2}, {name:"Sciences islamiques", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ]
+  },
+  "3": { // 3ème année
+    "Scientifique": [
+      {name:"Mathématiques", coef:7}, {name:"Physique", coef:6}, {name:"Sciences de la Vie", coef:6},
+      {name:"Arabe", coef:3}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:2}, {name:"Education Islamique", coef:2},{name:"Philosophie", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Math": [
+      {name:"Mathématiques", coef:7}, {name:"Physique", coef:6}, {name:"Sciences naturelles", coef:2},
+      {name:"Arabe", coef:3}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:2}, {name:"Education Islamique", coef:2},{name:"Philosophie", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Math-Technique": [
+      {name:"Mathématiques", coef:7}, {name:"Physique", coef:6}, {name:"Technologie", coef:5},
+      {name:"Arabe", coef:3}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:2}, {name:"Education Islamique", coef:2},{name:"Philosophie", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Gestion": [
+      {name:"Gestion et comptabilité", coef:5}, {name:"Economie", coef:4}, {name:"Droit", coef:2}, {name:"Mathématiques", coef:3},
+      {name:"Arabe", coef:2}, {name:"Français", coef:2}, {name:"Anglais", coef:2}, {name:"Histoire-Géo", coef:3}, {name:"Education Islamique", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Langues": [
+      {name:"Arabe", coef:4}, {name:"Français", coef:4}, {name:"Anglais", coef:4}, {name:"Troisième langue", coef:4},
+      {name:"Mathématiques", coef:2}, {name:"Histoire-Géo", coef:4}, {name:"Education Islamique", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ],
+    "Lettres & Philosophie": [
+      {name:"Arabe", coef:5}, {name:"Philosophie", coef:5}, {name:"Histoire-Géo", coef:4}, {name:"Français", coef:3}, {name:"Anglais", coef:3},
+      {name:"Mathématiques", coef:2}, {name:"Sciences naturelles", coef:2}, {name:"Sciences physiques", coef:2}, {name:"Education Islamique", coef:2},
+      {name:"Education physique", coef:1, optional:true}, {name:"Education artistique", coef:1, optional:true}
+    ]
+  }
+};
+
+// Éléments DOM
+const yearSelect = document.getElementById("year");
+const filiereSelect = document.getElementById("filiere");
+const table = document.getElementById("bulletinTable");
+
+// Fonction pour mettre à jour les filières
+function updateFilieres() {
+  const year = yearSelect.value;
+  filiereSelect.innerHTML = "";
+  for (const filiere in data[year]) {
+    const option = document.createElement("option");
+    option.value = filiere;
+    option.textContent = filiere;
+    filiereSelect.appendChild(option);
+  }
+  updateSubjects();
+}
+
+// Fonction pour mettre à jour les matières
+function updateSubjects() {
+  const year = yearSelect.value;
+  const filiere = filiereSelect.value;
+  const subjects = data[year][filiere];
+  
+  // Vider le tableau
+  table.innerHTML = `
+    <tr>
+      <th>المادة</th>
+      <th>المعامل</th>
+      <th>الفرض</th>
+      <th>تقويم مستمر</th>
+      <th>أعمال تطبيقية</th>
+      <th>اختبار</th>
+      <th>معدل المادة</th>
+      <th>مجموع نقاط المادة</th>
+      <th>شامل؟</th>
+    </tr>
+  `;
+  
+  // Ajouter les lignes pour chaque matière
+  subjects.forEach((subj, index) => {
+    const row = table.insertRow();
+    let optionalCell = "";
+    if (subj.optional) {
+      optionalCell = `<td><input type="checkbox" id="check_${index}" checked></td>`;
+    } else {
+      optionalCell = `<td>✓</td>`;
+    }
+    
+    row.innerHTML = `
+      <td>${subj.name}</td>
+      <td>${subj.coef}</td>
+      <td><input type="number" min="0" max="20" step="0.01" id="f_${index}" placeholder="0-20" oninput="autoCap(this)"></td>
+      <td><input type="number" min="0" max="20" step="0.01" id="cc_${index}" placeholder="0-20" oninput="autoCap(this)"></td>
+      <td><input type="number" min="0" max="20" step="0.01" id="tp_${index}" placeholder="0-20" oninput="autoCap(this)"></td>
+      <td><input type="number" min="0" max="20" step="0.01" id="exam_${index}" placeholder="0-20" oninput="autoCap(this)"></td>
+      <td id="moy_${index}">-</td>
+      <td id="points_${index}">-</td>
+      ${optionalCell}
+    `;
+  });
+}
+
+// Fonction pour limiter automatiquement les notes à 20
+function autoCap(input) {
+  let value = parseFloat(input.value);
+  
+  // Si la valeur est invalide ou négative, la mettre à 0
+  if (isNaN(value)) {
+    input.value = "";
+    input.classList.remove('error');
+    return;
+  }
+  
+  // Limiter automatiquement à 20
+  if (value > 20) {
+    input.value = 20;
+    input.classList.add('error');
+  } else if (value < 0) {
+    input.value = 0;
+    input.classList.add('error');
+  } else {
+    input.classList.remove('error');
+  }
+}
+
+// Fonction de calcul de la moyenne
+function calculateAverage() {
+  const year = yearSelect.value;
+  const filiere = filiereSelect.value;
+  const subjects = data[year][filiere];
+  let totalPoints = 0;
+  let totalCoef = 0;
+
+  // Réinitialiser les erreurs
+  const inputs = document.querySelectorAll('input[type="number"]');
+  inputs.forEach(input => {
+    input.classList.remove('error');
+  });
+
+  subjects.forEach((subj, index) => {
+    // Récupérer et valider les notes
+    let f = parseFloat(document.getElementById("f_"+index).value) || 0;
+    let cc = parseFloat(document.getElementById("cc_"+index).value) || 0;
+    let tp = parseFloat(document.getElementById("tp_"+index).value) || 0;
+    let exam = parseFloat(document.getElementById("exam_"+index).value) || 0;
+
+    // Valider que les notes sont entre 0 et 20
+    f = Math.max(0, Math.min(20, f));
+    cc = Math.max(0, Math.min(20, cc));
+    tp = Math.max(0, Math.min(20, tp));
+    exam = Math.max(0, Math.min(20, exam));
+
+    // Mettre à jour les valeurs dans les inputs
+    document.getElementById("f_"+index).value = f;
+    document.getElementById("cc_"+index).value = cc;
+    document.getElementById("tp_"+index).value = tp;
+    document.getElementById("exam_"+index).value = exam;
+
+    const include = subj.optional ? document.getElementById("check_"+index).checked : true;
+    if(include) {
+      // Seule l'épreuve (exam) est multipliée par 2
+      const moy = (cc + tp + f + exam * 2) / 5;
+      const points = moy * subj.coef;
+      totalPoints += points;
+      totalCoef += subj.coef;
+
+      document.getElementById("moy_"+index).textContent = moy.toFixed(2);
+      document.getElementById("points_"+index).textContent = points.toFixed(2);
+
+      // Couleur selon la note
+      const moyCell = document.getElementById("moy_"+index);
+      const pointsCell = document.getElementById("points_"+index);
+      if(moy < 10) {
+        moyCell.style.backgroundColor = "#f8d7da"; 
+        pointsCell.style.backgroundColor = "#f8d7da";
+      } else if(moy < 12) {
+        moyCell.style.backgroundColor = "#fff3cd"; 
+        pointsCell.style.backgroundColor = "#fff3cd";
+      } else {
+        moyCell.style.backgroundColor = "#d4edda"; 
+        pointsCell.style.backgroundColor = "#d4edda";
+      }
+    } else {
+      document.getElementById("moy_"+index).textContent = "-";
+      document.getElementById("points_"+index).textContent = "-";
+      document.getElementById("moy_"+index).style.backgroundColor = "";
+      document.getElementById("points_"+index).style.backgroundColor = "";
+    }
+  });
+
+  const generalAverage = totalCoef > 0 ? Math.min(20, totalPoints/totalCoef).toFixed(2) : "0.00";
+  document.getElementById("result").textContent = "المعدل العام : " + generalAverage + "/20";
+}
+
+// Fonction pour réinitialiser le formulaire
+function resetForm() {
+  if(confirm("هل أنت متأكد من أنك تريد مسح جميع العلامات؟")) {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+      input.value = "";
+      input.classList.remove('error');
+    });
+    
+    const moyCells = document.querySelectorAll('[id^="moy_"]');
+    const pointsCells = document.querySelectorAll('[id^="points_"]');
+    moyCells.forEach(cell => cell.textContent = "-");
+    pointsCells.forEach(cell => cell.textContent = "-");
+    
+    document.getElementById("result").textContent = "";
+  }
+}
+
+// Fonction pour remplir avec des notes aléatoires
+function fillRandom() {
+  if(confirm("هل تريد ملء العلامات بقيم عشوائية؟")) {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+      // Générer une note aléatoire entre 8 et 18
+      const randomNote = (Math.random() * 10 + 8).toFixed(2);
+      input.value = parseFloat(randomNote);
+      input.classList.remove('error');
+    });
+    calculateAverage();
+  }
+}
+
+// Initialisation
+yearSelect.addEventListener("change", updateFilieres);
+filiereSelect.addEventListener("change", updateSubjects);
+updateFilieres();
+</script>
+</body>
+</html>
+

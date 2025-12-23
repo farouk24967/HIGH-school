@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="photos/حسني احمد high school.png" type="image/png">
+<title>حاسبة معدل البكالوريا - الجزائر</title>
+<style>
+  body { 
+    font-family: 'Arial', sans-serif; 
+    background: #f4f4f4; 
+    padding: 20px; 
+    direction: rtl; 
+    margin: 0;
+  }
+  .container { 
+    max-width: 1000px; 
+    margin: auto; 
+    background: #fff; 
+    padding: 25px; 
+    border-radius: 12px; 
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  }
+  h1 { 
+    text-align: center; 
+    color: #2c5aa0; 
+    margin-bottom: 25px; 
+    font-size: 1.8em;
+  }
+  .selectors { 
+    text-align: center; 
+    margin-bottom: 25px; 
+    padding: 15px; 
+    background: #f8f9fa; 
+    border-radius: 8px;
+  }
+  .selectors select { 
+    padding: 10px 15px; 
+    margin: 0 12px; 
+    border-radius: 6px; 
+    border: 2px solid #ddd; 
+    font-size: 16px;
+    direction: ltr;
+    min-width: 220px;
+  }
+  .subjects-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 20px 0; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .subjects-table th, 
+  .subjects-table td { 
+    border: 1px solid #ccc; 
+    padding: 12px; 
+    text-align: center; 
+    vertical-align: middle;
+  }
+  .subjects-table th { 
+    background: #2c5aa0; 
+    color: white; 
+    font-weight: bold;
+  }
+  input[type="number"] { 
+    width: 80px; 
+    padding: 8px; 
+    text-align: center; 
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  button { 
+    display: block; 
+    margin: 25px auto 15px; 
+    padding: 12px 30px; 
+    background: #28a745; 
+    color: white; 
+    border: none; 
+    border-radius: 6px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background 0.3s;
+  }
+  button:hover { 
+    background: #218838; 
+  }
+  .result-section { 
+    text-align: center; 
+    margin-top: 20px; 
+    padding: 20px; 
+    background: #e8f5e8; 
+    border-radius: 8px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #155724;
+  }
+  .optional-col { 
+    font-size: 0.9em; 
+    color: #666; 
+  }
+  .info-text { 
+    text-align: center; 
+    color: #666; 
+    margin-bottom: 15px; 
+    font-style: italic;
+  }
+  .error { 
+    background-color: #ffe6e6 !important; 
+    border-color: #ff0000 !important;
+  }
+  
+  @media (max-width: 768px) {
+    .container { padding: 15px; }
+    .selectors select { 
+      margin: 8px 0; 
+      width: 100%; 
+      max-width: 300px; 
+    }
+    input[type="number"] { width: 70px; font-size: 13px; }
+    .subjects-table th, .subjects-table td { padding: 8px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>حاسبة معدل البكالوريا - النظام الجزائري</h1>
+  
+  <div class="selectors">
+    <select id="filiere">
+      <option value="">اختر الشعبة</option>
+      <option value="Scientifique">الشعبة العلمية</option>
+      <option value="Math">رياضيات</option>
+      <option value="Math-Technique">رياضيات-تقني</option>
+      <option value="Gestion">تسيير واقتصاد</option>
+      <option value="Langues">اللغات الأجنبية</option>
+      <option value="Lettres & Philosophie">آداب وفلسفة</option>
+    </select>
+  </div>
+  
+  <div class="info-text">
+    ملاحظة: أدخل المعدل النهائي لكل مادة (من 0 إلى 20)، وسيتم حساب المعدل العام كالتالي: (المعدل × المعامل) لكل مادة. إذا تجاوز المعدل 20، سيتم تلقائياً تعيينه إلى 20.
+  </div>
+  
+  <div id="subjectsContainer"></div>
+  
+  <button onclick="calculateBacAverage()">احسب معدل البكالوريا</button>
+  
+  <div id="result" class="result-section" style="display: none;"></div>
+</div>
+
+<script>
+// Données des matières et coefficients pour le bac (3ème année)
+const bacData = {
+  "Scientifique": [
+    {name: "الرياضيات", coef: 7}, 
+    {name: "الفيزياء", coef: 6}, 
+    {name: "علوم الحياة والأرض", coef: 6},
+    {name: "العربية", coef: 2}, 
+    {name: "الفرنسية", coef: 2}, 
+    {name: "الإنجليزية", coef: 2}, 
+    {name: "التاريخ والجغرافيا", coef: 2}, 
+    {name: "التربية الإسلامية", coef: 2},
+    {name: "التربية البدنية", coef: 1, optional: true}, 
+    {name: "التربية الفنية", coef: 1, optional: true}
+  ],
+  "Math": [
+    {name: "الرياضيات", coef: 7}, 
+    {name: "الفيزياء", coef: 6}, 
+    {name: "علوم الطبيعة", coef: 2},
+    {name: "العربية", coef: 2}, 
+    {name: "الفرنسية", coef: 2}, 
+    {name: "الإنجليزية", coef: 2}, 
+    {name: "التاريخ والجغرافيا", coef: 2}, 
+    {name: "التربية الإسلامية", coef: 2},
+    {name: "التربية البدنية", coef: 1, optional: true}, 
+    {name: "التربية الفنية", coef: 1, optional: true}
+  ],
+  "Math-Technique": [
+    {name: "الرياضيات", coef: 7}, 
+    {name: "الفيزياء", coef: 6}, 
+    {name: "التكنولوجيا", coef: 5},
+    {name: "العربية", coef: 2}, 
+    {name: "الفرنسية", coef: 2}, 
+    {name: "الإنجليزية", coef: 2}, 
+    {name: "التاريخ والجغرافيا", coef: 2}, 
+    {name: "التربية الإسلامية", coef: 2},
+    {name: "التربية البدنية", coef: 1, optional: true}, 
+    {name: "التربية الفنية", coef: 1, optional: true}
+  ],
+  "Gestion": [
+    {name: "تسيير واقتصاد", coef: 5}, 
+    {name: "الاقتصاد", coef: 4}, 
+    {name: "الحقوق", coef: 2}, 
+    {name: "الرياضيات", coef: 3},
+    {name: "العربية", coef: 2}, 
+    {name: "الفرنسية", coef: 2}, 
+    {name: "الإنجليزية", coef: 2}, 
+    {name: "التاريخ والجغرافيا", coef: 3}, 
+    {name: "التربية الإسلامية", coef: 2},
+    {name: "التربية البدنية", coef: 1, optional: true}, 
+    {name: "التربية الفنية", coef: 1, optional: true}
+  ],
+  "Langues": [
+    {name: "العربية", coef: 4}, 
+    {name: "الفرنسية", coef: 4}, 
+    {name: "الإنجليزية", coef: 4}, 
+    {name: "لغة ثالثة", coef: 4},
+    {name: "الرياضيات", coef: 2}, 
+    {name: "التاريخ والجغرافيا", coef: 4}, 
+    {name: "التربية الإسلامية", coef: 2},
+    {name: "التربية البدنية", coef: 1, optional: true}, 
+    {name: "التربية الفنية", coef: 1, optional: true}
+  ],
+  "Lettres & Philosophie": [
+    {name: "العربية", coef: 5}, 
+    {name: "الفلسفة", coef: 5}, 
+    {name: "التاريخ والجغرافيا", coef: 4}, 
+    {name: "الفرنسية", coef: 3}, 
+    {name: "الإنجليزية", coef: 3},
+    {name: "الرياضيات", coef: 2}, 
+    {name: "علوم الطبيعة", coef: 2}, 
+    {name: "الفيزياء", coef: 2}, 
+    {name: "التربية الإسلامية", coef: 2},
+    {name: "التربية البدنية", coef: 1, optional: true}, 
+    {name: "التربية الفنية", coef: 1, optional: true}
+  ]
+};
+
+const filiereSelect = document.getElementById("filiere");
+const subjectsContainer = document.getElementById("subjectsContainer");
+const resultDiv = document.getElementById("result");
+
+function updateSubjects() {
+  const filiere = filiereSelect.value;
+  if (!filiere) {
+    subjectsContainer.innerHTML = "";
+    resultDiv.style.display = "none";
+    return;
+  }
+  
+  const subjects = bacData[filiere];
+  let tableHTML = `
+    <table class="subjects-table">
+      <thead>
+        <tr>
+          <th>المادة</th>
+          <th>المعامل</th>
+          <th>المعدل النهائي<br>(0-20)</th>
+          <th>شامل؟</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  
+  subjects.forEach((subj, index) => {
+    const optionalCell = subj.optional 
+      ? `<td><input type="checkbox" id="check_${index}" checked></td>`
+      : `<td class="optional-col">إجباري</td>`;
+      
+    tableHTML += `
+      <tr>
+        <td>${subj.name}</td>
+        <td><strong>${subj.coef}</strong></td>
+        <td><input type="number" min="0" max="20" step="0.01" id="moy_${index}" placeholder="0-20" oninput="validateInput(this)"></td>
+        ${optionalCell}
+      </tr>
+    `;
+  });
+  
+  tableHTML += `</tbody></table>`;
+  subjectsContainer.innerHTML = tableHTML;
+  resultDiv.style.display = "none";
+}
+
+// Fonction pour valider automatiquement l'entrée
+function validateInput(input) {
+  let value = parseFloat(input.value);
+  
+  // Si la valeur est invalide ou négative, la mettre à 0
+  if (isNaN(value) || value < 0) {
+    input.value = 0;
+    input.classList.remove('error');
+    return;
+  }
+  
+  // Si la valeur dépasse 20, la mettre automatiquement à 20
+  if (value > 20) {
+    input.value = 20;
+    input.classList.add('error');
+  } else {
+    input.classList.remove('error');
+  }
+}
+
+function calculateBacAverage() {
+  const filiere = filiereSelect.value;
+  if (!filiere) {
+    alert("الرجاء اختيار شعبة أولاً");
+    return;
+  }
+  
+  const subjects = bacData[filiere];
+  let totalPoints = 0;
+  let totalCoef = 0;
+  
+  // Réinitialiser les erreurs
+  const inputs = document.querySelectorAll('input[type="number"]');
+  inputs.forEach(input => {
+    input.classList.remove('error');
+  });
+  
+  for (let index = 0; index < subjects.length; index++) {
+    const subj = subjects[index];
+    const include = subj.optional 
+      ? document.getElementById(`check_${index}`).checked 
+      : true;
+      
+    if (!include) continue;
+    
+    let moy = parseFloat(document.getElementById(`moy_${index}`).value) || 0;
+    
+    // Validation finale au moment du calcul
+    if (moy < 0) moy = 0;
+    if (moy > 20) moy = 20;
+    
+    // Mettre à jour l'affichage
+    document.getElementById(`moy_${index}`).value = moy;
+    
+    const points = moy * subj.coef;
+    totalPoints += points;
+    totalCoef += subj.coef;
+  }
+  
+  if (totalCoef === 0) {
+    resultDiv.innerHTML = "خطأ: لا توجد مواد مشمولة في الحساب";
+    resultDiv.style.display = "block";
+    return;
+  }
+  
+  // Le calcul du total ne peut pas dépasser 20
+  const generalAverage = Math.min(20, totalPoints / totalCoef).toFixed(2);
+  resultDiv.innerHTML = `معدل البكالوريا: <span style="color:#d35400; font-size:1.4em;">${generalAverage}/20</span>`;
+  resultDiv.style.display = "block";
+}
+
+// Initialisation
+filiereSelect.addEventListener("change", updateSubjects);
+</script>
+</body>
+</html>
+
