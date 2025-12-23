@@ -17,7 +17,7 @@
     max-width: 1000px; 
     margin: auto; 
     background: #fff; 
-    padding: 25px; 
+    padding: clamp(16px, 3vw, 25px); 
     border-radius: 12px; 
     box-shadow: 0 0 15px rgba(0,0,0,0.15);
   }
@@ -25,7 +25,7 @@
     text-align: center; 
     color: #2c5aa0; 
     margin-bottom: 25px; 
-    font-size: 1.8em;
+    font-size: clamp(1.4em, 4vw, 1.8em);
   }
   .selectors { 
     text-align: center; 
@@ -48,13 +48,16 @@
     border-collapse: collapse; 
     margin: 20px 0; 
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: block;
+    overflow-x: auto;
   }
   .subjects-table th, 
   .subjects-table td { 
     border: 1px solid #ccc; 
-    padding: 12px; 
+    padding: clamp(8px, 2.2vw, 12px); 
     text-align: center; 
     vertical-align: middle;
+    white-space: nowrap;
   }
   .subjects-table th { 
     background: #2c5aa0; 
@@ -63,6 +66,7 @@
   }
   input[type="number"] { 
     width: 80px; 
+    max-width: 22vw;
     padding: 8px; 
     text-align: center; 
     border: 1px solid #ccc; 
@@ -109,15 +113,19 @@
     border-color: #ff0000 !important;
   }
   
-  @media (max-width: 768px) {
-    .container { padding: 15px; }
+  @media (max-width: 900px) {
+    .selectors { padding: 12px; }
     .selectors select { 
       margin: 8px 0; 
       width: 100%; 
-      max-width: 300px; 
+      max-width: 360px; 
     }
-    input[type="number"] { width: 70px; font-size: 13px; }
-    .subjects-table th, .subjects-table td { padding: 8px; font-size: 14px; }
+  }
+  @media (max-width: 600px) {
+    .container { padding: 14px; }
+    input[type="number"] { width: 68px; font-size: 13px; }
+    .subjects-table th, .subjects-table td { padding: 8px; font-size: 13px; }
+    button { width: 100%; }
   }
 </style>
 </head>

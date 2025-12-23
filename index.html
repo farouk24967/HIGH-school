@@ -30,14 +30,17 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--primary-dark);
             transition: all 0.3s ease;
+            line-height: 1.6;
         }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1200px; margin-inline: auto; padding-inline: 1rem; }
 
         /* --- HEADER & NAVBAR --- */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 50px;
+            padding: clamp(10px, 2vw, 15px) clamp(16px, 4vw, 50px);
             background: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             position: sticky;
@@ -52,8 +55,8 @@
         }
 
         header img.logo {
-            width: 100px;
-            height: 100px;
+            width: clamp(56px, 10vw, 100px);
+            height: clamp(56px, 10vw, 100px);
             border-radius: 50%;
             object-fit: contain;
         }
@@ -119,7 +122,7 @@
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: clamp(1rem, 3vw, 2rem);
             min-height: 80vh;
         }
 
@@ -176,7 +179,7 @@
         }
 
         .section-title {
-            font-size: 2.2rem;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
             margin-bottom: 2rem;
             color: var(--primary-dark);
             border-bottom: 3px solid var(--primary-green);
@@ -212,13 +215,13 @@
         }
 
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
             margin-bottom: 1rem;
             color: var(--primary-green);
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             margin-bottom: 2rem;
             opacity: 0.9;
         }
@@ -245,8 +248,8 @@
         /* CARDS & GRIDS */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
             margin-bottom: 2rem;
         }
 
@@ -387,6 +390,7 @@
             display: flex;
             gap: 10px;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         /* GRADES LIST */
@@ -519,15 +523,15 @@
         }
 
         /* TABLES */
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; display: block; overflow-x: auto; }
+        th, td { padding: clamp(8px, 1.8vw, 12px); text-align: left; border-bottom: 1px solid #eee; white-space: nowrap; }
         html[dir="rtl"] th, html[dir="rtl"] td { text-align: right; }
         th { background-color: var(--light-bg); color: var(--primary-dark); font-weight: bold; }
         tr:hover { background-color: #f9f9f9; }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-            header { padding: 15px 20px; flex-wrap: wrap; }
+            header { padding: 12px 16px; flex-wrap: wrap; }
             .header-left { width: 100%; justify-content: space-between; margin-bottom: 10px; }
             .navbar { width: 100%; display: flex; justify-content: flex-end; }
             .navbar .hamburger { display: block; }
@@ -535,7 +539,7 @@
             .navbar ul {
                 position: fixed;
                 top: 0;
-                width: 300px;
+                width: min(80vw, 320px);
                 height: 100vh;
                 background: white;
                 flex-direction: column;
@@ -546,8 +550,8 @@
             }
 
             /* LTR: Menu slides from right, RTL: Menu slides from left */
-            html[dir="ltr"] .navbar ul { right: -300px; }
-            html[dir="rtl"] .navbar ul { left: -300px; }
+            html[dir="ltr"] .navbar ul { right: -100%; }
+            html[dir="rtl"] .navbar ul { left: -100%; }
 
             html[dir="ltr"] .navbar ul.active { right: 0; }
             html[dir="rtl"] .navbar ul.active { left: 0; }
@@ -555,9 +559,11 @@
             .navbar a { width: 100%; border-radius: 0; border-bottom: 1px solid var(--light-bg); }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2rem; }
+        @media (max-width: 600px) {
+            .hero { padding: 2.5rem 1rem; }
+            .hero h1 { font-size: 1.8rem; }
             .calculator-input { flex-direction: column; }
+            .navbar a { padding: 12px 16px; }
         }
         .cta-button {
     background: #0d6efd;
