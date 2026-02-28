@@ -627,6 +627,7 @@
 
     </style>
 </head>
+     
 <body>
 
     <!-- TOAST NOTIFICATION CONTAINER -->
@@ -656,8 +657,8 @@
                 <li><a href="#" onclick="showSection('accueil')"><i class="fas fa-home"></i> <span data-i18n="nav_home">Accueil</span></a></li>
                 <li><a href="#" onclick="showSection('apropos')"><i class="fas fa-info-circle"></i> <span data-i18n="nav_about">À propos</span></a></li>
                 <li><a href="#" onclick="showSection('filieres')"><i class="fas fa-book"></i> <span data-i18n="nav_tracks">Filières</span></a></li>
-                <li><a href="#" onclick="showSection('ressources')"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav_resources">Ressources</span></a></li>
-                <li><a href="#" onclick="showSection('galerie')"><i class="fas fa-images"></i> <span data-i18n="nav_gallery">Galerie</span></a></li>
+                <li><a href="#" onclick="showSection('ressources')"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav_resources">Calculatrice</span></a></li>
+                <li><a href="#" onclick="showSection('galerie')"><i class="fas fa-images"></i> <span data-i18n="nav_gallery">Ressources et galerie</span></a></li>
                 <li><a href="#" onclick="showSection('contact')"><i class="fas fa-phone"></i> <span data-i18n="nav_contact">Contact</span></a></li>
             </ul>
         </nav>
@@ -679,7 +680,7 @@
             <!-- IMAGE PRINCIPALE -->
             <div style="text-align: center; margin: 2rem 0;">
                 <img src="photos/549909581_122094309723039758_5102902059245060658_n.jpg" alt="Lycée Building" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15);">
-                <p style="color: var(--primary-green); font-weight: bold; margin-top: 10px;" data-i18n="img_caption">Bâtiment principal du Lycée Chahid Hasni Ahmed</p>
+                <p style="color: var(--primary-green); font-weight: bold; margin-top: 10px;" data-i18n="img_caption"> Lycée Chahid Hasni Ahmed</p>
             </div>
             <!-- ACTUALITÉS RÉCENTES -->
 
@@ -691,21 +692,6 @@
                     <p data-i18n="news_1_desc">Venez découvrir nos installations et rencontrer nos équipes pédagogiques. Samedi 15 janvier 2026 de 9h à 17h.</p>
                 </div>
                 <div class="news-item">
-                    <span class="news-date">18 Dec 2025</span>
-                    <h4 data-i18n="news_2_title">Résultats des examens</h4>
-                    <p data-i18n="news_2_desc">Félicitations à tous nos élèves pour leurs excellents résultats aux examens de fin d'année.</p>
-                </div>
-                 <div class="news-item">
-                    <span class="news-date">18 Dec 2025</span>
-                    <h4 data-i18n="news_2_title">Résultats des examens</h4>
-                    <p data-i18n="news_2_desc">Félicitations à tous nos élèves pour leurs excellents résultats aux examens de fin d'année.</p>
-                </div>
-                 <div class="news-item">
-                    <span class="news-date">18 Dec 2025</span>
-                    <h4 data-i18n="news_2_title">Résultats des examens</h4>
-                    <p data-i18n="news_2_desc">Félicitations à tous nos élèves pour leurs excellents résultats aux examens de fin d'année.</p>
-                </div>
-                 <div class="news-item">
                     <span class="news-date">18 Dec 2025</span>
                     <h4 data-i18n="news_2_title">Résultats des examens</h4>
                     <p data-i18n="news_2_desc">Félicitations à tous nos élèves pour leurs excellents résultats aux examens de fin d'année.</p>
@@ -726,11 +712,7 @@
                 </div>
                 <div class="card">
                     <h3>📚 <span data-i18n="card_hist_title">Historique</span></h3>
-                    <p data-i18n="card_hist_text">Fondé pour devenir un centre d'excellence en formation professionnelle, notre lycée accueille des centaines d'élèves chaque année.</p>
-                </div>
-                <div class="card">
-                    <h3>🎯 <span data-i18n="card_miss_title">Notre mission</span></h3>
-                    <p data-i18n="card_miss_text">Préparer les élèves à réussir dans le monde professionnel en combinant théorie et pratique.</p>
+                    <p data-i18n="card_hist_text"> notre lycée accueille des centaines d'élèves chaque année.</p>
                 </div>
             </div>
         </section>
@@ -776,7 +758,7 @@
             </div>
         </section>
 
-        <!-- RESSOURCES -->
+        <!-- Calculatrice -->
         <section id="ressources">
             <h2 class="section-title" data-i18n="nav_resources">Ressources pédagogiques</h2>
             
@@ -790,7 +772,7 @@
         </section>
 
          
-        <!-- GALERIE -->
+        <!-- GALERIE et Resources -->
         <section id="galerie">
             <h2 class="section-title" data-i18n="nav_gallery">Galerie photos</h2>
             <div class="gallery-grid">
@@ -799,6 +781,15 @@
                 <div class="gallery-item"><div class="gallery-placeholder">💻</div><div class="gallery-caption" data-i18n="gal_info">Informatique</div></div>
                 <div class="gallery-item"><div class="gallery-placeholder">🏋️</div><div class="gallery-caption" data-i18n="al_sport">Sport</div></div>
             </div>
+        <div id="mainGal" class="subpage active-page">
+    <h2 class="section-title">RESUME ET LECONS</h2>
+         <div class="gallery-grid">
+          <div class="gallery-item" onclick="showSubPage('annee1')">
+            <div class="gallery-placeholder">1</div><div class="gallery-caption">1ere Annee</div></div>
+          <div class="gallery-item" onclick="showSubPage('annee2')">
+            <div class="gallery-placeholder">2</div><div class="gallery-caption">2eme Annee</div></div>
+          <div class="gallery-item" onclick="showSubPage('annee3')">
+            <div class="gallery-placeholder">3</div><div class="gallery-caption">3eme Annee</div></div>
         </section>
 
         <!-- CONTACT -->
@@ -875,7 +866,7 @@
                 calc_simple_title: "Moyenne Simple", calc_desc: "Entrez vos notes (0-20) pour calculer la moyenne.",
                 ph_note: "Note (0-20)", btn_add: "Ajouter", res_avg: "Votre moyenne :", btn_reset: "Réinitialiser",
                 calc_coming_soon: "Calculateur de bulletin complet bientôt disponible.",
-                gal_build: "Bâtiment", gal_lab: "Labo", gal_info: "Informatique", al_sport: "Sport",
+                gal_build: "Bâtiment", gal_lab: "Labo", gal_info: "Informatique", al_sport: "Sport",gal_bu:"1ere Annee", gal_bui:"2eme Annee", gal_build:"3eme Annee",
                 lbl_name: "Nom complet *", lbl_email: "Email *", lbl_msg: "Message *", btn_send: "Envoyer le message",
                 ph_name: "Votre nom", ph_email: "votre@email.com", ph_msg: "Écrivez votre message ici...",
                 footer_about: "À propos", footer_contact: "Contact", footer_rights: "Tous droits réservés."
@@ -899,7 +890,7 @@
                 calc_simple_title: "Simple Average", calc_desc: "Enter your grades (0-20) to calculate the average.",
                 ph_note: "Grade (0-20)", btn_add: "Add", res_avg: "Your average:", btn_reset: "Reset",
                 calc_coming_soon: "Full report card calculator coming soon.",
-                gal_build: "Building", gal_lab: "Lab", gal_info: "IT", al_sport: "Sport",
+                gal_build: "Building", gal_lab: "Lab", gal_info: "IT", al_sport: "Sport",gal_bu:"1st Year", gal_bui:"2nd Year", gal_build:"3rd Year",
                 lbl_name: "Full Name *", lbl_email: "Email *", lbl_msg: "Message *", btn_send: "Send Message",
                 ph_name: "Your name", ph_email: "your@email.com", ph_msg: "Write your message here...",
                 footer_about: "About", footer_contact: "Contact", footer_rights: "All rights reserved."
@@ -923,7 +914,7 @@
                 calc_simple_title: "Promedio Simple", calc_desc: "Ingrese sus notas (0-20) para calcular el promedio.",
                 ph_note: "Nota (0-20)", btn_add: "Añadir", res_avg: "Su promedio:", btn_reset: "Reiniciar",
                 calc_coming_soon: "Calculadora de boletín completa próximamente.",
-                gal_build: "Edificio", gal_lab: "Laboratorio", gal_info: "Informática", al_sport: "Deporte",
+                gal_build: "Edificio", gal_lab: "Laboratorio", gal_info: "Informática", al_sport: "Deporte",gal_bu:"1er Año", gal_bui:"2do Año", gal_build:"3er Año",
                 lbl_name: "Nombre completo *", lbl_email: "Correo *", lbl_msg: "Mensaje *", btn_send: "Enviar mensaje",
                 ph_name: "Tu nombre", ph_email: "tu@email.com", ph_msg: "Escribe tu mensaje aquí...",
                 footer_about: "Acerca de", footer_contact: "Contacto", footer_rights: "Todos los derechos reservados."
@@ -947,7 +938,7 @@
                 calc_simple_title: "المعدل البسيط", calc_desc: "أدخل درجاتك (0-20) لحساب المعدل.",
                 ph_note: "الدرجة (0-20)", btn_add: "إضافة", res_avg: "معدلك:", btn_reset: "إعادة تعيين",
                 calc_coming_soon: "آلة حاسبة لكشف النقاط الكامل قريباً.",
-                gal_build: "المبنى", gal_lab: "المختبر", gal_info: "المعلوميات", al_sport: "الرياضة",
+                gal_build: "المبنى", gal_lab: "المختبر", gal_info: "المعلوميات", al_sport: "الرياضة",gal_bu:"السنة الأولى", gal_bui:"السنة الثانية", gal_build:"السنة الثالثة",
                 lbl_name: "الاسم الكامل *", lbl_email: "البريد الإلكتروني *", lbl_msg: "الرسالة *", btn_send: "إرسال الرسالة",
                 ph_name: "اسمك", ph_email: "بريدك@الالكتروني.com", ph_msg: "اكتب رسالتك هنا...",
                 footer_about: "معلومات عنا", footer_contact: "اتصل بنا", footer_rights: "جميع الحقوق محفوظة."
